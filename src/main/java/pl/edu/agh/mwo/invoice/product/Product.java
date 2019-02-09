@@ -17,19 +17,19 @@ public abstract class Product{
 		this.taxPercent = tax;
 		
 		  if (name == null) {
-			    throw new IllegalArgumentException("n must be positive");
+			    throw new IllegalArgumentException("name must not be null");
 			}
 		  
 		  if (name == "") {
-			    throw new IllegalArgumentException("n must be positive");
+			    throw new IllegalArgumentException("price must not be empty");
 			}
 		  
 		  if (price == null) {
-			    throw new IllegalArgumentException("n must be positive");
+			    throw new IllegalArgumentException("price must not be null");
 			}
 		  
 		  if (price.compareTo(BigDecimal.ZERO) < 0) {
-			    throw new IllegalArgumentException("n must be positive");
+			    throw new IllegalArgumentException("price must be positive");
 			}
 	}
 
