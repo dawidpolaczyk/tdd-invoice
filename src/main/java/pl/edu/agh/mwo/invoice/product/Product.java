@@ -36,6 +36,9 @@ public abstract class Product{
 	public String getName() {
 		return this.name;
 	}
+	public BigDecimal getTax() {
+		return price.multiply(taxPercent);
+	}
 
 	public BigDecimal getPrice() {
 		return this.price;
