@@ -10,7 +10,8 @@ public class Invoice {
 	private Collection<Product> products = new ArrayList<Product>();
 
 	public void addProduct(Product product) {
-		this.products.add(product);
+//		this.products.add(product);
+		this.addProduct(product, 1);
 	}
 
 	public void addProduct(Product product, Integer quantity) {
@@ -47,11 +48,12 @@ public class Invoice {
 	}
 
 	public BigDecimal getTotal() {
-		BigDecimal Total = new BigDecimal("0");
-		for (Product product : products) {
-			Total = Total.add(product.getPriceWithTax());
-		}
-		return Total;
+//		BigDecimal Total = new BigDecimal("0");
+//		for (Product product : products) {
+//			Total = Total.add(product.getPriceWithTax());
+//		}
+//		return Total;
+		return getSubtotal().add(getTax());
 
 	}
 }
