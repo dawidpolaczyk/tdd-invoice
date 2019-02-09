@@ -20,7 +20,7 @@ public abstract class Product{
 			    throw new IllegalArgumentException("name must not be null");
 			}
 		  
-		  if (name == "") {
+		  if (name.equals("")) {
 			    throw new IllegalArgumentException("price must not be empty");
 			}
 		  
