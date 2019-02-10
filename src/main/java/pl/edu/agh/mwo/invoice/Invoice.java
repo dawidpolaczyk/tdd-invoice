@@ -1,15 +1,12 @@
 package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Random;
-
 import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
-	private Map<Product, Integer> products = new HashMap<Product, Integer>();
+	private Map<Product, Integer> products = new LinkedHashMap<Product, Integer>();
 	private int number;
 	private static Integer nextNumber = 1;
 	
@@ -54,7 +51,26 @@ public class Invoice {
 	}
 	
 	public String getAsText() {
-		return null;
-//		return "Faktura nr: " + this.number;
+		StringBuilder sb = new StringBuilder(); //wydajniejsza metoda konkatenacji
+		sb.append("Faktura nr: " + this.number);
+		for (Product product : products.keySet()) {
+			BigDecimal quantity = new BigDecimal(products.get(product));
+			sb.append("\n");
+			sb.append(product.getName());
+			sb.append(" ");
+			sb.append(quantity);
+			sb.append(" ");
+			sb.append(product.getPrice());
+		}
+		sb.append("\nLiczba pozycji: ");
+		sb.append(this.products.size());
+		return sb.toString();
+//		String printed = "Faktura nr: " + this.number;
+//		for (Product product : products.keySet()) {
+//			BigDecimal quantity = new BigDecimal(products.get(product));
+//			printed += "\n" + product.getName() + " " + quantity + " " + product.getPrice();
+//		}
+//		printed += "\nLiczba pozycji: " + this.products.size();
+//		return printed;
 	}
 }
