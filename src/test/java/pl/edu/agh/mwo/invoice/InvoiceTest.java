@@ -1,6 +1,7 @@
 package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
+import java.util.regex.Matcher;
 
 import org.hamcrest.Matchers;
 import org.junit.Assert;
@@ -103,5 +104,45 @@ public class InvoiceTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvoiceWithNegativeQuantity() {
 		invoice.addProduct(new DairyProduct("Zsiadle mleko", new BigDecimal("5.55")), -1);
+	}
+	
+	@Test
+	public void testInoviceHasNumber() {
+		Integer number = invoice.getNumber();
+		Assert.assertNotNull(number);
+	}
+
+	@Test
+	public void testInoviceHasNumberGreaterThanZero() {
+		Integer number = invoice.getNumber();
+		Assert.assertThat(number, Matchers.greaterThan(0));
+	}
+
+	@Test
+	public void testTwoInvoicesHasDifferentNumbers() {
+		Integer number1 = invoice.getNumber();
+		Integer number2 = new Invoice().getNumber();
+		Assert.assertNotEquals(number1, number2);
+	}
+	
+	@Test
+	public void testTheSameInvoicesHasTheSameNumber() {
+		Integer number1 = invoice.getNumber();
+		Integer number2 = invoice.getNumber();
+		Assert.assertEquals(number1, number2);
+	}
+	
+	@Test
+	public void testTheSecondNumberIsGreaterThanFirst() {
+		Integer number1 = invoice.getNumber();
+		Integer number2 = new Invoice().getNumber();
+		Assert.assertThat(number1, Matchers.lessThan(number2));
+	}
+	
+	@Test
+	public void testPrintedInvoiceContainsNumber() {
+		String printedInvoice = invoice.getAsText();
+		String number = invoice.getNumber().toString();
+		Assert.assertThat(printedInvoice, Matchers.containsString("nr: " + number));
 	}
 }
