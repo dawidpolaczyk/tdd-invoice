@@ -21,7 +21,15 @@ public class Invoice {
 		if (product == null || quantity <= 0) {
 			throw new IllegalArgumentException();
 		}
+		
+		if (products.containsKey(product)) {
+			
+			Integer currentQuantity = this.products.get(product);
+			products.put(product, currentQuantity + quantity);
+		
+		} else {
 		products.put(product, quantity);
+		}
 	}
 	
 	public BigDecimal getNetTotal() {
@@ -65,6 +73,7 @@ public class Invoice {
 		sb.append("\nLiczba pozycji: ");
 		sb.append(this.products.size());
 		return sb.toString();
+		
 //		String printed = "Faktura nr: " + this.number;
 //		for (Product product : products.keySet()) {
 //			BigDecimal quantity = new BigDecimal(products.get(product));

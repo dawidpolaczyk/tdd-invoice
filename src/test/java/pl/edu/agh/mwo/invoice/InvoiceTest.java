@@ -172,6 +172,7 @@ public class InvoiceTest {
 				invoice.getAsText(),
 				Matchers.containsString("Chleb 2 5\nFrytki 3 6.50"));
 	}
+	
 	@Test
 	public void testAddingTheSameProductToInoviceTwice() {
 		invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")));
